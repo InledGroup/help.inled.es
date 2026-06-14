@@ -13,8 +13,9 @@ El proyecto está configurado para desplegarse automáticamente en **Cloudflare 
 
 ### 🔐 Configuración de Secretos en GitHub
 Para que el despliegue funcione, añade los siguientes secretos en tu repositorio (`Settings > Secrets and variables > Actions`):
-1. `CLOUDFLARE_API_TOKEN`: Tu token de API de Cloudflare.
-2. `CLOUDFLARE_ACCOUNT_ID`: Tu ID de cuenta de Cloudflare.
+1. `CLOUDFLARE_API_TOKEN`: Un API Token creado en Cloudflare (`My Profile > API Tokens > Create Token > Custom Token`) con el permiso:
+    - **Account** -> **Cloudflare Pages** -> **Edit**
+2. `CLOUDFLARE_ACCOUNT_ID`: Tu ID de cuenta (lo encuentras en la URL de tu panel de Cloudflare o en la barra lateral).
 
 **Nota:** Las variables `GITHUB_OWNER` y `GITHUB_REPO` se inyectan automáticamente en el workflow, y usaremos el `GITHUB_TOKEN` nativo de las Actions para leer las Issues sin límites de rate limit.
 
