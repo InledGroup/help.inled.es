@@ -11,7 +11,7 @@ Si eres un agente de IA y necesitas leer el contenido de una página para entend
 - **Vista RAW (IA):** `help.inled.es/help/slug.md`
 
 ### ✍️ Cómo publicar documentación
-Para añadir una nueva página, simplemente crea una **Issue** en este repositorio con la etiqueta `documentation`. El cuerpo de la issue DEBE empezar con estos dos metadatos:
+Para añadir una nueva página, simplemente crea una **Issue** en el repo [InledGroup/help.inled.es](https://github.com/InledGroup/help.inled.es) repositorio con la etiqueta `documentation`. El cuerpo de la issue DEBE empezar con estos dos metadatos:
 
 ```markdown
 slug: tu-url-amigable
