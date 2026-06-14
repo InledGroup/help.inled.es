@@ -27,13 +27,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const slug = "${{ steps.extract.outputs.slug }}";
+            const slug = "${{ steps.extract.outputs.slug }}".trim();
+            console.log(`Buscando artículo con slug: "${slug}"`);
+            
             if (!slug) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: "❌ No he podido encontrar el slug en la URL proporcionada. Asegúrate de poner la URL completa o el slug después de [DELETE]."
+                body: "❌ No he podido extraer un slug válido de la URL o el título. Asegúrate de que tenga el formato: https://help.inled.es/help/tu-slug"
               });
               return;
             }
@@ -43,12 +45,16 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: 'documentation',
-              state: 'open'
+              state: 'open',
+              per_page: 100
             });
 
             let found = false;
+            const slugRegex = new RegExp(`slug:\\s*${slug}(\\s|$)`, 'i');
+
             for (const issue of issues.data) {
-              if (issue.body && issue.body.includes(`slug: ${slug}`)) {
+              if (issue.body && slugRegex.test(issue.body)) {
+                console.log(`Match encontrado en Issue #${issue.number}`);
                 // Encontrada! La cerramos
                 await github.rest.issues.update({
                   owner: context.repo.owner,
@@ -70,11 +76,12 @@ jobs:
             }
 
             if (!found) {
+              console.log("No se encontró ninguna issue que coincida.");
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: `⚠️ No se encontró ningún artículo activo con el slug **${slug}**.`
+                body: `⚠️ No se encontró ningún artículo activo en GitHub con el slug **${slug}**.\n\n*Nota: Si el artículo es un archivo local en el repositorio, no se puede borrar mediante este workflow de Issues.*`
               });
             }
 
