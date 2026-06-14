@@ -1,0 +1,85 @@
+name: Manage Articles (Delete)
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-deletion:
+    if: contains(github.event.issue.title, '[DELETE]') || contains(github.event.issue.labels.*.name, 'delete-request')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract URL or Slug
+        id: extract
+        run: |
+          # Extraer el slug de la URL proporcionada en el cuerpo o título
+          # Extract the slug from the URL provided in the body or title
+          BODY="${{ github.event.issue.body }}"
+          SLUG=$(echo "$BODY" | grep -oP 'help/([^/\s]+)' | cut -d'/' -f2 || echo "")
+          if [ -z "$SLUG" ]; then
+            SLUG=$(echo "${{ github.event.issue.title }}" | grep -oP '\[DELETE\]\s*(\S+)' | awk '{print $2}' || echo "")
+          fi
+          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+
+      - name: Find and Close Original Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const slug = "${{ steps.extract.outputs.slug }}";
+            if (!slug) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: "❌ No he podido encontrar el slug en la URL proporcionada. Asegúrate de poner la URL completa o el slug después de [DELETE]."
+              });
+              return;
+            }
+
+            // Buscar issues abiertas con la etiqueta documentation
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'documentation',
+              state: 'open'
+            });
+
+            let found = false;
+            for (const issue of issues.data) {
+              if (issue.body && issue.body.includes(`slug: ${slug}`)) {
+                // Encontrada! La cerramos
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'completed'
+                });
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: `✅ Artículo con slug **${slug}** (Issue #${issue.number}) eliminado correctamente. La web se actualizará en breve.`
+                });
+                found = true;
+                break;
+              }
+            }
+
+            if (!found) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `⚠️ No se encontró ningún artículo activo con el slug **${slug}**.`
+              });
+            }
+
+            // Cerrar la issue de petición de borrado
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
