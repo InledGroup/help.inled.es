@@ -8,6 +8,8 @@ jobs:
   process-deletion:
     if: contains(github.event.issue.title, '[DELETE]') || contains(github.event.issue.labels.*.name, 'delete-request')
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Extract URL or Slug
         id: extract
