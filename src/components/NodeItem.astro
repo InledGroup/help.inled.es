@@ -1,0 +1,31 @@
+---
+import type { DocLeaf, FolderNode, TreeNode } from "../lib/tree";
+import NodeItem from "./NodeItem.astro";
+
+interface Props {
+  node: TreeNode;
+  /** href de la página actual, p.ej. /docs/a/b/doc/ */
+  activePath: string;
+}
+
+const { node, activePath } = Astro.props;
+
+const open = node.kind === "folder" && (activePath === "/" || activePath.startsWith(node.href));
+const isActive = node.href === activePath;
+---
+
+{node.kind === "doc" ? (
+  <li>
+    <a href={node.href} class:list={[{ active: isActive }]}>{node.title}</a>
+  </li>
+) : (
+  <li class:list={["nav-group", { open }]}>
+    <a href={node.href} class:list={["nav-folder", { active: isActive }]}>{node.title}</a>
+    {(node.docs.length > 0 || node.children.length > 0) && (
+      <ul hidden={!open}>
+        {node.docs.filter((d) => d.slug !== "index").map((d) => <NodeItem node={d} activePath={activePath} />)}
+        {node.children.map((c) => <NodeItem node={c} activePath={activePath} />)}
+      </ul>
+    )}
+  </li>
+)}

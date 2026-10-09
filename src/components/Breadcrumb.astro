@@ -1,0 +1,27 @@
+---
+import { titleize } from "../lib/tree";
+
+interface Props {
+  /** slugs de carpetas ancestro (sin la página actual) */
+  trail: string[];
+  /** título de la página actual */
+  title: string;
+}
+
+const { trail, title } = Astro.props;
+const isHome = trail.length === 0;
+---
+
+{!isHome && (
+  <nav class="breadcrumb" aria-label="Miga de pan">
+    <ol>
+      <li><a href="/">Inicio</a></li>
+      {trail.map((slug, i) => (
+        <li>
+          <a href={`/docs/${trail.slice(0, i + 1).join("/")}/`}>{titleize(slug)}</a>
+        </li>
+      ))}
+      <li aria-current="page"><span>{title}</span></li>
+    </ol>
+  </nav>
+)}

@@ -1,0 +1,64 @@
+---
+import "../styles/global.css";
+import "../scripts/theme.js";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path relativo al sitio, empezando por "/" */
+  path?: string;
+  /** JSON-LD extra para esta página */
+  jsonLd?: object | object[];
+}
+
+const { title, description, path = Astro.url.pathname, jsonLd = [] } = Astro.props;
+const SITE_URL = Astro.site ?? new URL("https://help.inled.es");
+const canonical = new URL(path, SITE_URL);
+const ogImage = new URL("/logo/inled.png", SITE_URL);
+const ldArray = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+---
+
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Inled Docs" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f4f6" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" href="/logo/inled.png" />
+    <link rel="apple-touch-icon" href="/logo/inled.png" />
+
+    {ldArray.filter(Boolean).map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

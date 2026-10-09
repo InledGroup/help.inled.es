@@ -1,0 +1,126 @@
+---
+import { getCollection, render } from "astro:content";
+import Docs from "../../layouts/Docs.astro";
+import { buildTree, findFolder, docHref } from "../../lib/tree";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("docs");
+  const tree = buildTree(entries);
+
+  // 1) todas las carpetas que tienen index.md → su índice
+  // 2) todos los docs no-index → su página
+  const paths: { params: { path: string }; props: { entry: (typeof entries)[number]; kind: "index" | "doc" } }[] = [];
+
+  const walk = (node: ReturnType<typeof buildTree>, prefix: string[]) => {
+    if (node.slug !== "") {
+      const indexEntry = entries.find((e) => e.id === [...prefix, "index"].join("/") + ".md");
+      if (indexEntry) paths.push({ params: { path: prefix.join("/") }, props: { entry: indexEntry, kind: "index" } });
+    }
+    for (const e of entries) {
+      const parts = e.id.replace(/\.md$/, "").split("/");
+      const fileName = parts.pop() as string;
+      if (fileName === "index") continue;
+      if (parts.join("/") === prefix.join("/")) {
+        paths.push({ params: { path: [...prefix, fileName].join("/") }, props: { entry: e, kind: "doc" } });
+      }
+    }
+    node.children.forEach((c) => walk(c, [...prefix, c.slug]));
+  };
+  walk(tree, []);
+  return paths;
+}
+
+const { entry, kind } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const entries = await getCollection("docs");
+const tree = buildTree(entries);
+
+const rawSegs = entry.id.replace(/\.md$/, "").split("/");
+const isIndex = rawSegs[rawSegs.length - 1] === "index";
+const pagePath = rawSegs;
+const folderTrail = rawSegs.slice(0, -1); // carpetas ancestro
+const title = entry.data.title || "Inled Docs";
+const description = entry.data.subtitle || entry.data.description || title;
+const SITE_URL = Astro.site ?? new URL("https://help.inled.es");
+
+/* TOC (h2/h3) para documentos */
+const tocItems = (headings ?? []).filter((h) => h.depth === 2 || h.depth === 3);
+const toc = !isIndex && tocItems.length >= 2
+  ? `<ul>${tocItems.map((h) => `<li class="toc-l${h.depth}"><a href="#${h.slug}">${h.text}</a></li>`).join("")}</ul>`
+  : undefined;
+
+/* cards del índice de carpeta */
+let cards: { icon: string; title: string; desc: string; href: string }[] = [];
+if (isIndex) {
+  const folder = findFolder(tree, folderTrail);
+  if (folder) {
+    cards = [
+      ...folder.docs
+        .filter((d) => d.slug !== "index")
+        .map((d) => ({ icon: "📄", title: d.title, desc: d.subtitle || d.excerpt, href: docHref(folder.path, d.slug) })),
+      ...folder.children.map((c) => ({
+        icon: "📁",
+        title: c.title,
+        desc: c.subtitle || `${c.docs.length + c.children.length} secciones`,
+        href: c.href,
+      })),
+    ];
+  }
+}
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: title,
+    description,
+    inLanguage: "es",
+    image: new URL("/logo/inled-logo-full.png", SITE_URL).toString(),
+    author: { "@type": "Organization", name: "Inled Group", url: "https://inled.es" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL.toString() },
+      ...folderTrail.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 2,
+        name: title,
+        item: new URL(`/docs/${folderTrail.slice(0, i + 1).join("/")}/`, SITE_URL).toString(),
+      })),
+      { "@type": "ListItem", position: folderTrail.length + 2, name: title, item: new URL(Astro.url.pathname, SITE_URL).toString() },
+    ],
+  },
+];
+---
+
+<Docs tree={tree} title={title} description={description} trail={folderTrail} toc={toc} jsonLd={jsonLd}>
+  {isIndex ? (
+    <>
+      <h1>{title}</h1>
+      {entry.data.subtitle && <p class="page-subtitle">{entry.data.subtitle}</p>}
+      {cards.length > 0 && (
+        <div class="card-grid">
+          {cards.map((c) => (
+            <a class="card" href={c.href}>
+              <span class="card-icon">{c.icon}</span>
+              <span class="card-body">
+                <strong>{c.title}</strong>
+                <small>{c.desc}</small>
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+      <Content />
+    </>
+  ) : (
+    <>
+      <h1>{title}</h1>
+      {entry.data.subtitle && <p class="page-subtitle">{entry.data.subtitle}</p>}
+      <Content />
+    </>
+  )}
+</Docs>

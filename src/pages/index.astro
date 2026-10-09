@@ -1,0 +1,92 @@
+---
+import { getCollection, render } from "astro:content";
+import Docs from "../layouts/Docs.astro";
+import { buildTree, type FolderNode } from "../lib/tree";
+
+const entries = await getCollection("docs");
+const readme = entries.find((e) => e.id === "index.md" || e.id === "index");
+const tree = buildTree(entries);
+
+/* high-level indexes: for each project, its child folders + direct docs */
+const sections = tree.children.map((c) => {
+  const folder = c as FolderNode;
+  return {
+    title: folder.title,
+    href: folder.href,
+    subtitle: folder.subtitle ?? "",
+    items: [
+      ...folder.docs.filter((d) => d.slug !== "index").map((d) => ({ title: d.title, href: d.href })),
+      ...folder.children.map((k) => ({ title: k.title, href: k.href, sub: k.subtitle ?? `${k.docs.length + k.children.length} sections` })),
+    ],
+  };
+});
+
+const SITE_URL = Astro.site ?? new URL("https://help.inled.es");
+const siteUrl = SITE_URL.toString().replace(/\/$/, "");
+const promptExample = `curl ${siteUrl}/llms.txt`;
+const promptExample2 = `curl ${siteUrl}/docs/pulsar-os/index.md`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Inled Docs",
+  url: siteUrl,
+  inLanguage: "en",
+  publisher: {
+    "@type": "Organization",
+    name: "Inled Group",
+    url: "https://inled.es",
+    logo: new URL("/logo/inled-logo-full.png", SITE_URL).toString(),
+  },
+};
+---
+
+<Docs tree={tree} title="Inled Docs — Inled Group Documentation" description="Official Inled Group documentation: Pulsar OS and its editions, Chrome extensions and more. Clear guides in English, designed for humans and AI agents." jsonLd={jsonLd}>
+  <section class="hero">
+    <img class="hero-logo" src="/logo/inled-logo-full.png" alt="Inled Group full logo" width="240" height="60" />
+    <h1 class="sr-only">Inled Docs</h1>
+    <p class="tagline">Dream, Build. All Inled Group documentation, in one place.</p>
+  </section>
+
+  <section class="ai-agents" aria-label="For AI agents">
+    <h2>For AI agents</h2>
+    <p>
+      This documentation is machine-readable. To explore or answer questions from an AI agent
+      (Claude, ChatGPT, Cursor…), fetch the <strong>llms.txt</strong> index first, then read any
+      page as <strong>raw Markdown</strong> by appending <code>index.md</code> to its URL.
+    </p>
+    <div class="ai-steps">
+      <div class="ai-step">
+        <h3>1 · Get the index of every page</h3>
+        <pre><code>{promptExample}</code></pre>
+        <p>Returns the list of all pages with their title, description, HTML URL and raw Markdown URL.</p>
+      </div>
+      <div class="ai-step">
+        <h3>2 · Read any page as raw Markdown</h3>
+        <pre><code>{promptExample2}</code></pre>
+        <p>Same URL as the HTML page, ending in <code>index.md</code> — no scraping or HTML parsing needed.</p>
+      </div>
+    </div>
+    <p class="ai-hint">
+      Suggested agent prompt: <em>"Fetch <code>{siteUrl}/llms.txt</code> with curl, pick the most
+      relevant page for my question from its list, then fetch that page's <code>index.md</code>
+      raw Markdown and answer using only that content."</em>
+    </p>
+  </section>
+
+  <div class="home-index">
+    {sections.map((s) => (
+      <section class="home-section">
+        <h2><a href={s.href}>{s.title}</a></h2>
+        {s.subtitle && <p class="home-section-sub">{s.subtitle}</p>}
+        <ul class="home-items">
+          {s.items.map((it) => (
+            <li>
+              <a href={it.href}>{it.title}</a>
+              {"sub" in it && it.sub && <small>{it.sub}</small>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Docs>
