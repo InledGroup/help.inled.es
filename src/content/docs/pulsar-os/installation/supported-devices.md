@@ -1,15 +1,15 @@
 ---
-title: Dispositivos soportados y requisitos
-subtitle: 
+title: Supported devices and requirements
+subtitle: Which edition works on which machine
 ---
-Pulsar OS consta de varias ediciones, las cuales diseñadas para un tipo de dispositvo y propósito.  
+Pulsar OS comes in several editions, each designed for a type of device and purpose.
 
-## Bitten Fruit  
-Edición tipo MacOS, la cual requiere:  
-### Requisitos minimos  
-- **Memoria**: 8GB  
-- **Espacio**: 20GB - 50GB para poder meter cosas  
-- **Procesador**: Debe ser capaz de ejecutar Windows 10 o Windows 7, osea, que no sea una patata, para eso estamos preparando una edición especial  
+## Bitten Fruit
+A macOS-style edition, which requires:
+### Minimum requirements
+- **Memory**: 8GB
+- **Storage**: 20GB - 50GB to have room for your things
+- **Processor**: It must be able to run Windows 10 or Windows 7 — i.e. it can't be a potato; we are preparing a special edition for those.
 
-### Según el cargador de arranque  
-Si tu dispositivo es muy antiguo solo soportará BIOS y no UEFI por lo que deberás usar la edición **GRUB** obligatoriamente ya que la REFIND no funcionará. En caso de que tu PC sea medianamente moderno esto no se aplica y podrás usar ambas ediciones sin problema.  
+### Depending on the boot loader
+If your device is very old it will only support BIOS and not UEFI, in which case you must use the **GRUB** edition, since the REFIND one will not work. If your PC is reasonably modern this does not apply and you can use both editions without problems.

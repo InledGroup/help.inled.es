@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Pulsar OS"
-description: "Una introducción al proyecto Pulsar OS"
+description: "An introduction to the Pulsar OS project"
 order: 1
 ---
 
@@ -13,16 +13,3 @@ Unlike most Linux distributions, Pulsar OS is built around a friendly community 
 You are welcome. We need your help, and we will be glad to have you contribute in any way you can.
 
 You can read our documentation to learn more about Pulsar OS and our stance on AI. In short: we don't prohibit it, we love it, but we don't go overboard.
-
----
-
-Pulsar OS es una apuesta que nunca se ha hecho en Linux. La mayoría de distribuciones Linux se limitan a personalizar minimamente la apariencia de un entorno gráfico u ofrecer un sistema con un entorno preinstalado.
-Pero de esta manera Linux no puede reemplazar a los sistemas operativos que dominan el mercado de los sistemas de escritorio personales. Linux se ha construido bajo enfoques propios y desde el punto de vista de los desarrolladores profesionales que lo crean. Pero no se ha tenido en cuenta el punto de vista del usuario estándar, o de lo que el mercado necesita. Continuamente aparecen distribuciones Linux cuya única apuesta es por poner un paquete de iconos, un entorno gráfico, unos pocos tweaks, calamares installer y adelante. Y eso no puede ser. Si queremos que Linux esté al nivel de macOS (de Windows no hablo porque Windows 11 es un dolor de muelas) tenemos que aprender de lo que los hace especiales. ¿Por qué la gente adopta macOS? ¿Por qué algunos salen de macOS?
-
-Pulsar OS es el sistema que ha venido a cambiarlo todo.
-
-A diferencia de la mayoría de distribuciones Linux, Pulsar OS se compone por una comunidad amigable, con diferentes niveles de conocimiento, siempre abierta a acoger a nuevos miembros, sin importar cuanto tiempo le puedan dedicar. Personalmente, estoy harto de la comunidad Linux, en la que las decisiones dependen de una única persona o un grupo de poder dentro de la comunidad. Asimismo, la comunidad de Pulsar OS está compuesta por personas de diferente signo político y nos importa un carajo qué opine cada uno porque aquí no nos interesa la política.
-
-Eres bienvenido, necesitamos tu ayuda y estaremos encantados de que ayudes en lo que puedas.
-
-Puedes leer nuestra documentación más acerca de Pulsar OS y uso de IA, porque respecto a la IA te lo resumimos: no la prohibimos, nos encanta, pero sin pasarnos.

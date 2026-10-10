@@ -10,61 +10,61 @@ All you need is a USB drive (or storage memory) and a disk image flashing tool.
 
 ## Windows users  
 
-### Flashear la ISO desde Windows  
+### Flash the ISO from Windows
 
-Necesitarás un USB para esto. Basicamente se trata de hacer que puedas arrancar un sistema operativo desde un USB, como si fuera el disco de tu PC, para luego instalarlo.  
+You will need a USB drive for this. Basically it is about making it possible to boot an operating system from a USB, as if it were your PC's disk, to then install it.
 
-- Descarga RUFUS para hacerlo visualmente. [Esta es su web](https://rufus.ie/)  
-- Selecciona la imagen ISO y configura como para cualquier otra distro Linux
-- Cuando te pregunte si usar modo dd o iso, selecciona **modo DD**  
+- Download RUFUS to do it visually. [This is its website](https://rufus.ie/)
+- Select the ISO image and set it up as you would for any other Linux distro
+- When asked whether to use dd or iso mode, choose **DD mode**  
 
-### Arrancar Pulsar OS en un PC Windows  
+### Boot Pulsar OS on a Windows PC
 
-Busca en Google como desactivar el Secure Boot en tu PC (próximas versiones incluirán soporte para secure Boot). Secure Boot lo que hace es verificar que el sistema operativo tiene una firma de Microsoft (para evitar virus de sector de arranque) pero nada más, no te preocupes, el código de Pulsar OS es completamente abierto y auditable.  
+Search Google for how to disable Secure Boot on your PC (upcoming releases will include Secure Boot support). What Secure Boot does is verify that the operating system carries a Microsoft signature (to prevent boot-sector viruses) and nothing more — don't worry, Pulsar OS's code is fully open and auditable.
 
-Una vez hayas desactivado Secure Boot, encuentra en Google cual es la tecla que en tu PC sirve para acceder al cargador de arranque desde el cual deberás seleccionar tu USB.  
+Once Secure Boot is disabled, look up on Google which key on your PC opens the boot loader, from which you should select your USB drive.
 
-Una vez seleccionado el USB, te aparecerá una ventana en la que tendrás varias opciones:
-- Se recomienda seleccionar la primera (TO RAM, copiará el todo el sistema que está en el USB a la memoria de tu ordenador, tardará un rato)
-- En caso de que de error o consideres queb tarda mucho (la paciencia es buena consejera) selecciona la tercera opción  
+Once you have selected the USB, a window will appear with several options:
+- We recommend selecting the first one (TO RAM: it copies the whole system from the USB into your computer's memory; it takes a while)
+- If it errors out or you think it takes too long (patience is a virtue), select the third option  
 
 ## MacOS users  
 
-### Flashear la ISO desde MacOS 
+### Flash the ISO from macOS
 
-Necesitarás una memoria USB.  
+You will need a USB drive.
 
-- Descarga [Balena Etcher aquí](https://etcher.balena.io/#download-etcher).  
-- Selecciona la ISO que te has bajado, luego selecciona tu USB y dale a flashear.  
+- Download [Balena Etcher here](https://etcher.balena.io/#download-etcher).
+- Select the ISO you downloaded, then select your USB and hit flash.
 
-### Arrancar Pulsar OS en un MacBook  
+### Boot Pulsar OS on a MacBook
 
-**Importante!** Pulsar OS solo soporta Macbooks con procesador de Intel, lo cual puedes comprobar en el menú Acerca de mi Mac cuando estés en MacOS.  
+**Important!** Pulsar OS only supports MacBooks with an Intel processor, which you can check under "About This Mac" while in macOS.
 
-- Apaga tu ordenador  
-- Enciéndelo y cuando veas que la pantalla emite luz empieza a mantener presionado Alt/Option (según como se llame en tu teclado)  
-- Selecciona el USB  
+- Shut down your computer
+- Turn it on and, as soon as the screen lights up, start holding down Alt/Option (depending on what it is called on your keyboard)
+- Select the USB
 
-Una vez seleccionado el USB, te aparecerá una ventana en la que tendrás varias opciones:
-- Se recomienda seleccionar la primera (TO RAM, copiará el todo el sistema que está en el USB a la memoria de tu ordenador, tardará un rato)
-- En caso de que de error o consideres queb tarda mucho (la paciencia es buena consejera) selecciona la tercera opción    
+Once you have selected the USB, a window will appear with several options:
+- We recommend selecting the first one (TO RAM: it copies the whole system from the USB into your computer's memory; it takes a while)
+- If it errors out or you think it takes too long (patience is a virtue), select the third option
 
 ## Linux users    
 
 
-Si no sabes como hacerlo, sigue esta guía. Si ya sabes, no hace falta leerla.
+If you don't know how to do it, keep reading. If you already do, you can skip this section.
 
-### Flashear ISO desde Linux  
+### Flash the ISO from Linux
 
-**Puedes usar DD**
+**You can use DD**
 
 - If you come from another Linux distribution, we recommend that you **do not use Balena Etcher**. Use `gnome-disk-utility` instead.
-- Selecciona el USB y en el menú de los ··· selecciona Restaurar imagen de disco.  
-- En el popup selecciona la ISO de Pulsar OS y dale a flashear.  
+- Select the USB and in the ⋯ menu choose "Restore Disk Image".
+- In the popup select the Pulsar OS ISO and hit flash.
 
-### Arrancar Pulsar OS en un PC con Linux  
+### Boot Pulsar OS on a Linux PC
 
-- BUsca en Google la combinación de teclas para accedr al cargador de arranque de tu PC y en él selecciona el USB. Recuerda haber desactivado Secure Boot.
+- Search Google for the key combination to enter your PC's boot loader and select the USB there. Remember to have disabled Secure Boot.
 
 ## Secure Boot
 
@@ -72,15 +72,15 @@ Our great friend Secure Boot, a Microsoft invention to prevent the installation 
 
 We are trying to implement support for Secure Boot. In the meantime, you will need to go into your device's BIOS and disable it. It is not a virus or danger: the only thing your computer will not do is check the integrity of your operating system before starting it, to avoid viruses. But Linux has fewer viruses than Windows, and Pulsar OS is 100% auditable.
 
-**Search Google for specific instructions to know how to disable Secure Boot on your device model.** You can use the AI we have already prepared for you [here, thanks to Google AI Mode](https://www.google.com/search?q=vas+a+hacer+de+asistente+que+buscar%C3%A1+en+internet+y+explicar%C3%A1+al+usuario+como+desactivar+secure+boot+en+su+ordenador).
+**Search Google for specific instructions to know how to disable Secure Boot on your device model.** You can use the AI we have already prepared for you [here, thanks to Google AI Mode](https://www.google.com/search?q=you+will+act+as+an+assistant+that+searches+the+internet+and+explains+to+the+user+how+to+disable+secure+boot+on+their+computer).
 
 ## Dual boot    
 
-Pulsar OS soporta dual boot (instalarlo al lado de otro sistema operativo).  
-Lo que debes hacer es seleccionar la opción de Dual Boot en el instalador y se te abrirá el programa GParted, desde el cual puedes redimensionar la partición del sistema que ya tienes para dejar espacio para crear otra la cual luego deberás formatear a formato ext4 y finalmente al salir de GPARTED recargar la lista de particiones.  
+Pulsar OS supports dual boot (installing it alongside another operating system).
+What you have to do is select the Dual Boot option in the installer and the GParted program will open, from which you can resize the system partition you already have to make room for a new one, which you will then need to format as ext4; finally, when leaving GParted, reload the partition list.
 
-## No entiendes algunos conceptos? Pregúntanos en Discord o Telegram y te atenderemos personalizadamente.
+## Don't understand some concepts? Ask us on Discord or Telegram and we will give you personal support.
 
 ## Ventoy  
-**No está soportado en la versión actual publicada**  
-En la próxima versión (2.0) sí que lo estará.
+**Not supported in the currently published version**
+The next version (2.0) will support it.

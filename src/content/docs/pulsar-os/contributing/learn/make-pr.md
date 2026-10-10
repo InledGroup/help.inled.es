@@ -1,6 +1,6 @@
 ---
-title: Haz una PR
-subtitle: Ahora que ya sabes usar Git, toca enviarnos tu codigo
+title: Making a PR
+subtitle: Now that you know Git, it is time to send us your code
 ---
 To create a Pull Request (PR) on GitHub, you need to follow a standard workflow that involves forking, cloning, branching, committing, pushing, and finally opening the PR.
 Here is the complete step-by-step guide with the exact buttons you need to click:

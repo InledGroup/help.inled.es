@@ -1,26 +1,26 @@
 ---
-title: Como usar IA
-subtitle: Para hacer tu contribución, tu MVP, y que nosotros podamos hacerla seria, puedes usar IA
+title: How to use AI
+subtitle: To make your contribution, your MVP, and so we can polish it, you can use AI
 ---
-La IA puede ser de gran ayuda tanto para programar lo que tienes en mente como para enseñarte los fundamentos. Es por ello que en esta guía te explicamos como, ahora que ya sabes usar git, puedas usar la IA para programar.  
+AI can be a great help both for programming what you have in mind and for teaching you the fundamentals. That is why in this guide we explain how, now that you already know git, you can use AI to code.  
 
-## CLI's  
-Las IA's para programar normalmente se manejan desde la terminal, son como un chatbot pero de terminal. Desde ahí te mostrarán lso cambios que hacen, podrán ejecutar comandos en tu PC y básicamente hacer de todo.  
-La mayoría que son famosas requieren que pagues, pero en nuestro [Discord (clica aquí)](https://link.inled.es/discord) tienes anclado en el foro una publicación con la lista completa de IA's para programar que son gratuitas. Las principales son:  
-- Opencode con Big Pickle (la mejor)
-- Freebuff  
+## CLIs
+Coding AIs are usually run from the terminal; they are like a terminal chatbot. From there they show you the changes they make, can run commands on your PC, and basically do everything.
+Most of the famous ones require payment, but on our [Discord (click here)](https://link.inled.es/discord) there is a pinned forum post with the complete list of free coding AIs. The main ones are:
+- OpenCode with Big Pickle (the best)
+- Freebuff
 - Cline
 
-## Escribiendo a la IA: consejos    
+## Writing to the AI: tips
 
-La IA tiende a ser muy vaga y especialmente la gratuita tiende a ser muy cutre.  
-Es por ello que te recomendamos lo siguiente a incluir cuando envíes órdenes a la IA:  
-- **Explícale primero tu idea** y pregúntale como se puede implementar  
-- **Solicítale que te explique como puedes probarla y que ella verifique que su creación funciona**
-- **Dile que no te haga prototipos ni mocks, que se esfuerce**
-- **Dile que no use diseño AI Slop (enc aso de webs)**  
-- Si estás programando en nativo **dile que use el stack nativo recomendado**  
+AI tends to be vague, and especially the free ones are shoddy.
+So we recommend including the following when giving orders to your AI:
+- **Explain your idea first** and ask how it could be implemented
+- **Ask it to explain how you can test it, and to verify that its creation works**
+- **Tell it not to make prototypes or mocks, and to put in the effort**
+- **Tell it not to use AI Slope design (for websites)**
+- If you are coding natively, **tell it to use the recommended native stack**
 
-La IA no va a hacerte un software bien a la primera, por tanto te recomendamos lo siguiente:
-- Para revisar y encontrar errores, **usa Opencode**  
-- Para implementar features, también Opencode, luego usa Freeuff y Cline.
+AI won't produce well-made software on the first try, so we also recommend the following:
+- To review and find errors, **use OpenCode**
+- To implement features, also OpenCode, then use Freebuff and Cline.

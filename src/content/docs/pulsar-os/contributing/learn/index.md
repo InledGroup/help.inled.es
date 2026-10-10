@@ -1,5 +1,5 @@
 ---
 title: Learn
-subtitle: Aprende a contribuir, desde lo más esencial, aún que no sepas nada.
+subtitle: Learn to contribute, starting from the bare essentials even if you know nothing yet.
 ---
-En Pulsar OS aceptamos cualquier nivel de conocimiento para contribuir. Y si eres un usuario estándar que te gusta la informática o videojuegos y quieres hacer un cambio en Pulsar OS, esta documentación te guiará paso a paso para que puedas aprender lo fundamental, desde como usar IA para desarrollar tu MVP (concepto inicial que nosotros haremos producto final) hasta como publicar en Github (la plataforma de almacenamiento de código más usada y la cual usamos nosotros) y como hacer Pull Requests (añadir tu código a nuestro repositorio)
+At Pulsar OS we welcome contributors of any skill level. If you are a regular user who enjoys computers or gaming and wants to make a change in Pulsar OS, this documentation will walk you through the fundamentals step by step: from using AI to develop your MVP (the initial concept, which we will turn into the final product) to publishing on GitHub (the most widely used code hosting platform, and the one we use) and opening Pull Requests (adding your code to our repository)

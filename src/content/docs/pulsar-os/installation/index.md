@@ -4,7 +4,7 @@ subtitle: Install Pulsar OS step by step
 ---
 # Installation
 
-En esta sección te explicamos de manera sencilla como instalar Pulsar OS.
+In this section we walk you through installing Pulsar OS step by step.
 
 ## In this section
 
