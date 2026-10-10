@@ -31,4 +31,6 @@ We are delighted that you collaborate in different ways.
 
 ### The PR must contain
 - PKG repo format: DEBIAN/folder and PKGBUILD
-- Be prepared to be uploaded to the remote repo.
+- Be prepared to be uploaded to the remote repo.  
+
+## If you are learning, simply contact us and we will not require all this, and we will help you and shape your proposal

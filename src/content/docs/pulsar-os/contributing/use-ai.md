@@ -23,16 +23,3 @@ If you have any questions, stop by our chat channels and we will help you :)
 In resume, **we dont hate AI, we encourage you to use it**
 
 ---
-El mundo de Linux está dividido por muchos frentes de opinión (aún que hay uno predominante). Muchos están en contra del uso de IA en Linux por razones ideológicas o técnicas y cuando descubren algún proyecto hecho por IA lo desprestigian y buscan cualquier error para atacar al proyecto.
-
-Pues eso es otra cosa en la que Pulsar OS no se mete. Pulsar OS está desarrollado con la ayuda de la IA y testeado en profundidad. La comunidad de Pulsar OS usamos IA y no hay nada malo en usarla, simplemente no hay que pasarse.
-
-Cuando contribuyas a Pulsar OS, ten en cuenta:
-- La IA no te puede reemplazar a tí, no delegues en agentes la comunicación. No hagas PR's o issues con IA, agrégale tu punto. Esto viene dado por que es un sufrimiento no sentir que estas hablando con un humano, además de que el agente es responsabilidad tuya.
-- No rehagas cosas o edites gran cantidad de archivos.
-- Céntrate en cosas que falten o esten estropeadas, no en rehacer todo.
-- Lo que envíes tiene que estar probado y funcionar, y para que sea más probable su mergeo, es bueno que esté revisado y maduro.
-
-Con estas simples reglas, podemos hacer cosas con IA.
-
-Si tienes cualquier duda, pásate por nuestros canales de chat y te ayudaremos :)
